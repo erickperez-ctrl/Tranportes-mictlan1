@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transportes Mictlán | Mensajería Exprés CDMX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --gold:#f5b642;
+  --dark:#0b0b0b;
+  --dark2:#141414;
+  --text:#eaeaea;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#000;
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ================= HEADER ================= */
+header{
+  min-height:120vh;
+  background:
+    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.9)),
+    url("fondo.jpg") center/cover no-repeat;
+  padding-top:90px;
+}
+/* ================= NAV ================= */
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 5px; /* 🔥 más limpio */
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(10px);
+  transition:.3s;
+  flex-wrap:wrap;
+}
+
+nav.scrolled{
+  background:#000;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+
+nav h2{
+  font-weight:800;
+}
+
+nav span{
+  color:var(--gold);
+}
+
+nav ul{
+  display:flex;
+  gap:20px; /* 🔥 menos espacio = más limpio */
+  list-style:none;
+  align-items:center;
+}
+
+nav a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:500;
+  font-size:15px;
+}
+
+nav a:hover{
+  color:var(--gold);
+}
+
+.menu-toggle{
+  display:none;
+  font-size:28px;
+  color:#fff;
+  cursor:pointer;
+}
+/* ================= BUTTONS ================= */
+.btn{
+  background:linear-gradient(135deg,#f7c25a,#e3a52c);
+  color:#000;
+  padding:12px 26px;
+  border-radius:8px;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.btn.alt{
+  background:#1c1c1c;
+  color:#fff;
+  margin-left:12px;
+}
+
+/* ================= HERO ================= */
+.hero{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:40px;
+  padding:90px 60px;
+}
+
+.hero h1{
+  font-size:3.2rem;
+  font-weight:800;
+}
+
+.hero h1 span{color:var(--gold);}
+
+.hero p{
+  margin:20px 0 30px;
+  color:#d6d6d6;
+}
+
+/* ================= SECTIONS ================= */
+.section{
+  padding:90px 60px;
+  background:var(--dark);
+}
+
+.section.alt{background:var(--dark2);}
+
+.section h2{
+  text-align:center;
+  font-size:2.4rem;
+  margin-bottom:60px;
+}
+
+.section h2 span{color:var(--gold);}
+
+/* ================= SERVICES ================= */
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+
+.service{
+  background:#0f0f0f;
+  padding:30px;
+  border-radius:16px;
+  text-align:center;
+  border:1px solid rgba(245,182,66,.25);
+  transition:.3s;
+}
+
+.service:hover{
+  transform:translateY(-6px);
+  box-shadow:0 15px 30px rgba(245,182,66,.25);
+}
+
+.service img{
+  width:90px;
+  margin-bottom:20px;
+}
+
+.service h3{
+  color:var(--gold);
+  margin-bottom:10px;
+}
+
+/* ================= SLIDER ================= */
+.slider{
+  max-width:900px;
+  margin:auto;
+  overflow:hidden;
+  border-radius:18px;
+  position:relative;
+}
+
+.slides{
+  display:flex;
+  transition:.5s ease;
+}
+
+.slides img{
+  width:100%;
+  flex-shrink:0;
+  max-height:420px;
+  object-fit:contain;
+}
+
+.slider button{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.6);
+  border:none;
+  color:#fff;
+  font-size:22px;
+  padding:10px 14px;
+  cursor:pointer;
+}
+
+.prev{left:10px;}
+.next{right:10px;}
+
+/* ================= FEATURES ================= */
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+}
+
+.card{
+  background:#111;
+  padding:30px;
+  border-radius:16px;
+  transition:.3s;
+}
+
+.card:hover{transform:translateY(-6px);}
+
+.card i{
+  color:var(--gold);
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+/* ================= MAP ================= */
+.map-container{
+  max-width:1100px;
+  margin:auto;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 25px 50px rgba(0,0,0,.7);
+  border:1px solid rgba(245,182,66,.25);
+  position:relative;
+}
+
+.map-label{
+  position:absolute;
+  top:18px;
+  left:18px;
+  background:rgba(0,0,0,.75);
+  padding:10px 18px;
+  border-radius:30px;
+  font-size:.85rem;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.map-label i{color:var(--gold);}
+
+.map-container iframe{
+  width:100%;
+  height:420px;
+  border:0;
+  filter:grayscale(20%) brightness(.85) contrast(1.15);
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:#000;
+  padding:80px 40px 40px;
+  margin-top:auto;
+}
+
+.footer-content{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:40px;
+}
+
+.footer-block h4{
+  color:var(--gold);
+  margin-bottom:15px;
+  text-transform:uppercase;
+}
+
+.footer-block p{
+  font-size:.9rem;
+  color:#ccc;
+  margin-bottom:8px;
+}
+
+.footer-block i{
+  color:var(--gold);
+  margin-right:8px;
+}
+
+.socials{
+  display:flex;
+  gap:12px;
+}
+
+.socials a{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  transition:.3s;
+}
+
+.socials a:hover{
+  background:var(--gold);
+  color:#000;
+  transform:translateY(-4px);
+}
+
+.legal-box{
+  max-width:1100px;
+  margin:50px auto 25px;
+  padding:30px 40px;
+  background:linear-gradient(180deg,#0f0f0f,#0b0b0b);
+  border-left:5px solid var(--gold);
+  border-radius:12px;
+}
+
+.legal-box h4{
+  color:var(--gold);
+  margin-bottom:15px;
+}
+
+.legal-box p{
+  font-size:.85rem;
+  color:#bdbdbd;
+  line-height:1.6;
+}
+
+.copyright{
+  text-align:center;
+  font-size:.8rem;
+  opacity:.6;
+}
+
+/* ================= FLOAT BUTTONS ================= */
+.whatsapp,
+.google{
+  position:fixed;
+  right:25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  border-radius:50%;
+}
+
+.whatsapp{
+  bottom:25px;
+  background:#25d366;
+  width:60px;
+  height:60px;
+  font-size:32px;
+}
+
+.google{
+  bottom:95px;
+  background:#ea4335;
+  width:54px;
+  height:54px;
+  font-size:24px;
+}
+
+/* ===== MOBILE CTA ===== */
+@media(max-width:900px){
+
+  /* ===== NAV MOVIL ===== */
+
+  nav{
+    padding:12px 15px;
+  }
+
+  .nav-left{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  nav h2{
+    font-size:14px;
+  }
+
+  nav .btn{
+    padding:6px 10px;
+    font-size:11px;
+  }
+
+  nav ul{
+    display:none;
+    position:absolute;
+    top:60px;
+    left:0;
+    width:100%;
+    background:#000;
+    padding:20px;
+    flex-direction:column;
+    gap:15px;
+    text-align:center;
+  }
+
+  nav ul.show{
+    display:flex;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+
+  /* ===== HERO MOVIL ===== */
+
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+    padding:120px 20px 60px;
+  }
+
+  .hero .btn{
+    width:100%;
+    margin:10px 0;
+    display:block;
+  }
+
+  /* ===== FONDO MEJOR ADAPTADO ===== */
+
+   header{
+  min-height:30vh !important;
+  background-size:cover !important;
+  background-position:center center !important;
+}
+
+}
+.jobs{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+.job-card{
+  background:#111;
+  padding:30px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(245,182,66,.2);
+  text-align:center;
+}
+
+.job-card h3{
+  color:var(--gold);
+  margin-bottom:10px;
+}
+
+.job-card p{
+  color:#ccc;
+  margin-bottom:20px;
+}
+
+.job-video{
+  max-width:300px;
+  margin:40px auto 0;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(245,182,66,.2);
+}
+
+.job-video video{
+  width:100%;
+  border-radius:18px;
+}
+
+.job-btn{
+  display:inline-block;
+  background:var(--gold);
+  color:#000;
+  padding:10px 22px;
+  border-radius:8px;
+  font-weight:700;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.job-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(245,182,66,.5);
+}
+
+</style>
+</head>
+
+<body>
+
+<header id="inicio">
+<nav>
+  <div class="menu-toggle"><i class="fa-solid fa-bars"></i></div>
+
+  <div style="display:flex;align-items:center;gap:12px">
+    <img src="logo-mictlan.jpeg" style="height:45px">
+    <h2>TRANSPORTES <span>MICTLÁN</span></h2>
+  </div>
+
+  <ul>
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#como">Cómo funciona</a></li>
+    <li><a href="#cotizar">Cómo Cotizar</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#bolsa">Bolsa de trabajo</a></li>
+  </ul>
+
+  <a href="https://wa.me/5215558183449" class="btn">Cotizar</a>
+</nav>
+
+<section class="hero">
+  <div>
+    <h1>Envíos <span>Seguros y Rápidos</h1>
+    <p>Mensajería Exprés en motocicleta y unidades de 1.5 T y 3.5 T, con máxima seguridad.</p>
+    <a href="https://wa.me/5215558183449" class="btn">WhatsApp</a>
+    <a href="#servicios" class="btn alt">Servicios</a>
+  </div>
+</section>
+</header>
+
+<section id="servicios" class="section">
+<h2>Nuestros <span>Servicios</span></h2>
+<div class="services">
+  <div class="service"><img src="https://img.icons8.com/fluency/96/motorcycle.png"><h3>Motocicleta</h3></div>
+  <div class="service"><img src="https://img.icons8.com/fluency/96/truck.png"><h3>Unidades de 1.5 T y 3.5 T </h3></div>
+  <div class="service"><img src="https://img.icons8.com/fluency/96/box.png"><h3>Entrega Directa</h3></div>
+</div>
+</section>
+
+<section id="como" class="section alt">
+<h2>¿Cómo <span>Funciona</span>?</h2>
+<div class="features">
+  <div class="card"><i class="fa-solid fa-phone"></i><h3>Contáctanos</h3><p>Atención inmediata</p></div>
+  <div class="card"><i class="fa-solid fa-motorcycle"></i><h3>Recolectamos</h3><p>En tu ubicación</p></div>
+<div class="card">
+  <i class="fa-solid fa-receipt"></i>
+  <h3>Número de Guía</h3>
+  <p>Te proporcionamos uno para seguimiento de tu envío.</p>
+</div>
+
+  <div class="card"><i class="fa-solid fa-box"></i><h3>Entregamos</h3><p>Seguro y puntual</p></div>
+</div>
+</section>
+
+<!-- COMO COTIZAR -->
+<section id="cotizar" class="section">
+<h2>¿Cómo <span>Cotizar?</span></h2>
+
+<div class="features">
+  <div class="card">
+    <i class="fa-brands fa-whatsapp"></i>
+    <h3>Envíanos mensaje</h3>
+    <p>Escríbenos por WhatsApp con los detalles de tu envío.</p>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-location-dot"></i>
+    <h3>Comparte ubicación</h3>
+    <p>Indica puntos de recolección y entrega.</p>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-box"></i>
+    <h3>Tipo de paquete</h3>
+    <p>Describe peso, dimensiones y tipo de vehículo requerido.</p>
+  </div>
+</div>
+</section>
+
+<section id="galeria" class="section alt">
+<h2>Galería</h2>
+<div class="slider">
+  <div class="slides">
+    <img src="1.jpeg">
+    <img src="2.jpeg">
+    <img src="3.jpeg">
+  </div>
+  <button class="prev">❮</button>
+  <button class="next">❯</button>
+</div>
+</section>
+
+<section id="ubicacion" class="section">
+<h2>Nuestra <span>Ubicación</span></h2>
+<div class="map-container">
+  <div class="map-label"><i class="fa-solid fa-location-dot"></i> Transportes Mictlán · CDMX</div>
+  <iframe src="https://www.google.com/maps?q=Transportes%20Mictlan&output=embed" loading="lazy"></iframe>
+</div>
+</section>
+
+<!-- BOLSA DE TRABAJO -->
+<section id="bolsa" class="section alt">
+
+<h2>Bolsa <span>de Trabajo</span></h2>
+
+<div class="jobs">
+
+  <div class="job-card">
+    <h3>Repartidor en Moto</h3>
+    <p>Experiencia básica en entregas y manejo responsable.</p>
+    <a href="https://wa.me/5215558183449?text=Me%20interesa%20la%20vacante%20Operador"
+     class="job-btn">
+     Postular por WhatsApp
+  </a>
+  </div>
+
+  <div class="job-card">
+    <h3>Operador 1.5T / 3.5T</h3>
+    <p>Experiencia en manejo de unidades y logística de entregas.</p>
+    <a href="https://wa.me/5215558183449?text=Me%20interesa%20la%20vacante%20Operador"
+     class="job-btn">
+     Postular por WhatsApp
+  </a>
+
+
+  </div>
+
+</div>
+
+<!-- VIDEO MÁS PEQUEÑO Y PROFESIONAL -->
+<div class="job-video">
+  <video controls preload="metadata">
+    <source src="video-bolsa.mp4" type="video/mp4">
+  </video>
+</div>
+
+</section>
+
+
+<footer id="contacto">
+<div class="footer-content">
+
+  <div class="footer-block">
+    <h4>Contacto</h4>
+    <p><i class="fa-brands fa-whatsapp"></i> 55 5818 3449</p>
+    <p><i class="fa-solid fa-envelope"></i> mensajeriaypaqueteria@transportesmictlan.com</p>
+  </div>
+
+  <div class="footer-block">
+    <h4>Horario</h4>
+    <p>Lunes a Sábado</p>
+    <p>10:00 AM – 6:00 PM</p>
+  </div>
+
+  <div class="footer-block">
+    <h4>Síguenos</h4>
+    <div class="socials">
+      <a href="https://whatsapp.com/channel/0029VbBKj3SH5JM17KbUap1Z" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=61584352217786" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/transportes_mictlan_5818" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@transportes_mictlan_5818" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+    </div>
+  </div>
+
+</div>
+
+<div class="legal-box">
+<h4>Aviso Legal</h4>
+<p>Transportes Mictlán ofrece servicios de mensajería y paquetería sujetos a disponibilidad y condiciones operativas.</p>
+<p>No se transportan sustancias ilícitas ni mercancía de alto riesgo.</p>
+</div>
+
+<p class="copyright">© 2026 Transportes Mictlán · Todos los derechos reservados</p>
+</footer>
+
+<a class="whatsapp" href="https://wa.me/5215558183449" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+<a class="google" href="https://maps.app.goo.gl/1kE9z5mHZjiiQinq6" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
+
+<script>
+const menuToggle = document.querySelector('.menu-toggle');
+const menu = document.querySelector('nav ul');
+const links = document.querySelectorAll('nav ul a');
+
+menuToggle.addEventListener('click',()=>{
+  menu.classList.toggle('show');
+});
+
+links.forEach(l=>{
+  l.addEventListener('click',()=>{
+    menu.classList.remove('show');
+  });
+});
+
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').classList.toggle('scrolled',window.scrollY>50);
+  menu.classList.remove('show');
+});
+
+const slides=document.querySelector('.slides');
+const imgs=document.querySelectorAll('.slides img');
+let index=0;
+
+document.querySelector('.next').onclick=()=>{
+  index=(index+1)%imgs.length;
+  slides.style.transform=`translateX(-${index*100}%)`;
+};
+
+document.querySelector('.prev').onclick=()=>{
+  index=(index-1+imgs.length)%imgs.length;
+  slides.style.transform=`translateX(-${index*100}%)`;
+};
+</script>
+
+</body>
+</html>
